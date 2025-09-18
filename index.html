@@ -86,6 +86,8 @@
       }
 
       // Create URL with query params
+      var baseUrl = "https://farmqr.vercel.app/harvest.html";
+
       var url = `harvest.html?crop=${encodeURIComponent(crop)}&weight=${encodeURIComponent(weight)}&date=${encodeURIComponent(date)}&location=${encodeURIComponent(location)}`;
 
       var qrcodeContainer = document.getElementById("qrcode");
