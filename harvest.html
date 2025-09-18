@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harvest Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      width: 320px;
+    }
+    h2 {
+      text-align: center;
+    }
+    p {
+      font-size: 16px;
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Harvest Details</h2>
+    <p id="crop"></p>
+    <p id="weight"></p>
+    <p id="date"></p>
+    <p id="location"></p>
+  </div>
+
+  <script>
+    // Get query params
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById("crop").textContent = "Crop Type: " + (params.get("crop") || "N/A");
+    document.getElementById("weight").textContent = "Weight: " + (params.get("weight") || "N/A") + " kg";
+    document.getElementById("date").textContent = "Harvest Date: " + (params.get("date") || "N/A");
+    document.getElementById("location").textContent = "Farm Location: " + (params.get("location") || "N/A");
+  </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harvest Upload - QR Code Generator</title>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      padding: 20px;
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    h2 {
+      text-align: center;
+    }
+    input, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+    }
+    button {
+      padding: 12px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #qrcode {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>HARVEST UPLOAD</h2>
+    
+    <select id="crop-type">
+      <option value="">Select Crop Type</option>
+      <option value="Wheat">Wheat</option>
+      <option value="Rice">Rice</option>
+      <option value="Corn">Corn</option>
+      <option value="Vegetables">Vegetables</option>
+    </select>
+    
+    <input type="number" id="weight" placeholder="Weight (kg)">
+    <input type="date" id="harvest-date">
+    <input type="text" id="farm-location" placeholder="Farm Location">
+
+    <button onclick="generateQRCode()">GENERATE QR CODE</button>
+
+    <div id="qrcode"></div>
+  </div>
+
+  <script>
+    function generateQRCode() {
+      var crop = document.getElementById("crop-type").value;
+      var weight = document.getElementById("weight").value;
+      var date = document.getElementById("harvest-date").value;
+      var location = document.getElementById("farm-location").value;
+
+      if (!crop || !weight || !date || !location) {
+        alert("Please fill all fields!");
+        return;
+      }
+
+      // Create URL with query params
+      var url = `harvest.html?crop=${encodeURIComponent(crop)}&weight=${encodeURIComponent(weight)}&date=${encodeURIComponent(date)}&location=${encodeURIComponent(location)}`;
+
+      var qrcodeContainer = document.getElementById("qrcode");
+      qrcodeContainer.innerHTML = "";
+
+      new QRCode(qrcodeContainer, {
+        text: url,
+        width: 150,
+        height: 150
+      });
+    }
+  </script>
+</body>
+</html>
